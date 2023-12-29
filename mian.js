@@ -68,49 +68,61 @@ function containsAllProperties(inputString) {
     return containsNumber && containsCapitalLetter && containsSpecialCharacter;
 }
 
+let password_suggestions = {}
+
+
 // function to check if password weak 
 function isWeak(password) {
+    let is_weak = false;
     // check is password contain capital letter, special character and number
     if (!containsAllProperties(password)) {
-        return true;
+        password_suggestions['password_rules'] = 'please make sure your password contain capital letter, special character and numbers';
+        is_weak = true;
     }
     // check if length of password is less than 5
     if (password.length <= 4) {
-        return true;
+        password_suggestions['password_length'] = 'please make sure your password is at least 5 characters long';
+        is_weak = true;
     }
     const entropy = calculateEntropy(password);
     const variance = calculateVariance(password);
     console.log(entropy, variance);
     if (entropy < entropyThreshold && variance < varianceThreshold) {
-        return true;
+        password_suggestions['password_complexity'] = 'please make sure your password is complex enough, try adding more characters';
+        is_weak = true;
     }
-    return false;
+    return is_weak;
 }
 
 
 // Function to check if password is medium
 function isMedium(password) {
+    let is_medium = false;
     // check if length of password is between 5 and 7
     if (password.length > 4 && password.length < 8) {
-        return true;
+        password_suggestions['password_length'] = 'password length is good, but try adding more characters to make it stronger';
+        is_medium = true;
     }
     const entropy = calculateEntropy(password);
     const variance = calculateVariance(password);
     if ((entropy >= entropyThreshold && entropy < entropyThreshold + 14)|| (variance >= varianceThreshold && variance < varianceThreshold + 200)) {
-        return true;
+        password_suggestions['password_complexity'] = 'password complexity is good, but try adding more characters to make it stronger';
+        is_medium = true;
     }
-    return false;
+    return is_medium;
 }
 
 
 // Function to check if password is strong
 function isStrong(password) {
+    let is_strong = false;
     const entropy = calculateEntropy(password);
     const variance = calculateVariance(password);
     if (entropy >= entropyThreshold + 14 || variance >= varianceThreshold + 200) {
-        return true;
+        password_suggestions['password_complexity'] = 'Your password is strong, good job!, password with large entropy and variance are hard to crack';
+        is_strong = true;
     }
-    return false;
+    return is_strong;
 }
 
 
