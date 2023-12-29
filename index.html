@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>password_suggestions</title>
 </head>
 <body>
     
@@ -19,14 +19,16 @@
     <div class="container">
         <div class="form-container">
             <form id="form">
+               <center> <P id="pass">Enter password</P></center>
                 <div class="input-container">
                     <i class="fa-solid fa-eye-slash input-icon" style="color: #9200e0;"></i>
                     <input type="password" id="password-input" name="password">
-                </div>
+               </div>
                 <button type="submit">Check Password</button>
             </form>
+            <label id="passLab" hidden for="password"> </label> 
+            <center> <p id="passPara"></p></center>
         </div>
-
         <div class="progress-line-container">
             <div class="progress-line" id="progress-line"></div>
             <h4 id="strength-text"></h4>
@@ -36,6 +38,26 @@
 
         </div>
     </div>
+
+    <div class="password-suggestions" id="password-suggestions"></div>
+
+    <input type="password" id="passwordInput" placeholder="Enter your password">
+    <button onclick="checkPasswordStrength()">Check Password Strength</button>
+    
+        <div class="password-info"></div>
+    
+        <script>
+            // Paste your JavaScript code here
+    
+            // Function to check password strength on button click
+            function checkPasswordStrength() {
+                const passwordInput = document.getElementById('passwordInput');
+                const password = passwordInput.value;
+                
+                const strength = assessPasswordStrength(password);
+                console.log('Password Strength:', strength);
+            }
+        </script>
 
 
     <script src="mian.js"></script>
