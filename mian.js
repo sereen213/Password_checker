@@ -15,7 +15,6 @@ for (let i = 0; i < 6; i++) {
     progress_line.appendChild(progress_bar);
 }
 
-
 // create function to rest progress bar
 function resetProgressBar() {
     for (let i = 0; i < 6; i++) {
